@@ -15,8 +15,10 @@ public class Conexao {
 
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
-            "jdbc:postgresql://localhost:5433/SpotiFEI",
+            "jdbc:postgresql://localhost:5432/SpotiFEI",
             "postgres", 
-            "fei");
+            "hN@060106"
+            //"fei",
+        );
     }
 }

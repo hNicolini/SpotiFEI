@@ -30,6 +30,18 @@ public ResultSet consultar(String titulo) throws SQLException {
     
     statement.setString(1, titulo);
     return statement.executeQuery();
-    // OBS: Quem chamar este método será responsável por fechar o Statement e ResultSet
+
 }
+        public int buscarIdPorTitulo(String titulo) throws SQLException {
+        String sql = "SELECT id FROM musicas WHERE titulo = ?";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, titulo);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+        }
+        return -1; // se não encontrar
+    }
 }
