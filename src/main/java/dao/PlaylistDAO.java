@@ -16,10 +16,12 @@ public class PlaylistDAO {
     }
 
 public void inserir(Usuarios Usuarios , Musicas Musica) throws SQLException {
-    String sql = "INSERT INTO Playlist(usuario, id_musica) VALUES (?, ?)";
+    String sql = "INSERT INTO Playlist(usuario, id_musica, titulo, autor) VALUES (?, ?, ?, ?)";
     try (PreparedStatement statement = conn.prepareStatement(sql)) {
         statement.setString(1, Usuarios.getUsuario());
         statement.setInt(2, Musica.getId());
+        statement.setString(3, Musica.getTitulo());
+        statement.setString(4, Musica.getAutor());
         statement.executeUpdate();
     }
 }

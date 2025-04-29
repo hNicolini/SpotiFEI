@@ -2,17 +2,19 @@ package main;
 
 import dao.MusicaDAO;
 import dao.Conexao;
+import dao.PlaylistDAO;
 import dao.UsuariosDAO;
 import model.Musicas;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import model.Playlist;
 import model.Usuarios;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+    public static void main(String[] args) throws SQLException {
+        
         
         Conexao conexao = new Conexao();
         
@@ -25,31 +27,106 @@ public class Main {
         }   
         
         try (Connection conn = conexao.getConnection()) {
+             Scanner input = new Scanner(System.in);
+             
             MusicaDAO musicaDAO = new MusicaDAO(conn);
             UsuariosDAO usuarioDAO = new UsuariosDAO(conn);
+            PlaylistDAO playlistDAO = new PlaylistDAO(conn);
             
-            System.out.println("Digite o nome de usuario: ");;;;;
-            String usuario = input.next();
-            System.out.println("Digite a sua senha: ");
-            String senha = input.next();
+            while(true){
+            System.out.println("Oq deseja Fazer: \n"
+                    + "1 - Login \n"
+                    + "2 - Cadastro \n");
+            int opcao = input.nextInt();
             
-            Usuarios usuario1 = new Usuarios();
-            usuario1.setUsuarios(usuario);
-            usuario1.setSenha(senha);
-            
-            
-            ResultSet busca = usuarioDAO.consultar(usuario);
+                if(opcao == 1){
+                    
+                    
+                    System.out.println("Digite o nome de usuário: ");
+                    String usuario = input.next();
+                    System.out.println("Digite a sua senha: ");
+                    String senha = input.next();
 
-            if (busca.next()) { 
-                System.out.println("Usuário Existente!");
-            } else {
-                usuarioDAO.inserir(usuario1);
-                System.out.println("Usuario Cadastrado com sucesso!");
+                    ResultSet busca = usuarioDAO.consultar_login(usuario, senha);
+
+                    try {
+                        if (busca.next()) { 
+                            System.out.println("Usuário logado com sucesso!\n"
+                                + "Bem-vindo, " + usuario + "!");
+                        } else {
+                            System.out.println("Usuário ou senha incorreto(s)");
+//                            System.exit(1);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    ResultSet resultado = musicaDAO.listarTodas();
+
+                        while (resultado.next()) {
+                            String titulo = resultado.getString("titulo");
+                            String autor = resultado.getString("autor"); // ou "artista", conforme sua tabela
+                            System.out.println("Título: " + titulo + " | Artista: " + autor);
+                        }
+                   
+
+
+                   
+                    input.nextLine(); 
+
+                    Usuarios usuario1 = new Usuarios(usuario, senha); 
+
+                    System.out.println("Qual o nome da música?");
+                    String titulo = input.nextLine();
+
+                    System.out.println("Qual o nome do artista?");
+                    String artista = input.nextLine();
+
+                    int idMusica = musicaDAO.buscarIdPorTitulo(titulo, artista);
+
+                    if (idMusica == -1) {
+                        System.out.println("Música não encontrada no banco de dados.");
+                        return;
+                    }
+
+                    Musicas musica1 = new Musicas();
+                    musica1.setTitulo(titulo);
+                    musica1.setAutor(artista);
+                    musica1.setId(idMusica);
+
+                    playlistDAO.inserir(usuario1, musica1);
+
+                    
+                    System.out.println("Música adicionada à playlist de " + usuario1.getUsuario() + "!");
+                }
+                
+                else if (opcao == 2) {
+                System.out.println("Digite o nome de usuário: ");
+                String usuario = input.next();
+                System.out.println("Digite a sua senha: ");
+                String senha = input.next();
+
+                Usuarios usuario1 = new Usuarios();
+                usuario1.setUsuarios(usuario);
+                usuario1.setSenha(senha);
+
+                ResultSet busca = usuarioDAO.consultar(usuario);
+
+                if (busca.next()) {
+                    System.out.println("Usuário já existe!");
+                } else {
+                    usuarioDAO.inserir(usuario1);
+                    System.out.println("Usuário cadastrado com sucesso!");
+                }
+
+                System.out.println("Voltando ao menu inicial...\n");
             }
-
-            System.out.println(musicaDAO.buscarIdPorTitulo("One Time"));
+        }   
+            
+            
+     
+            
                
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             System.err.println("Erro ao acessar o banco de dados:");
             e.printStackTrace();
         }

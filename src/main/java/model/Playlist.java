@@ -4,10 +4,24 @@ package model;
 public class Playlist {
     protected Musicas musica;
     protected Usuarios usuario;
+    protected Playlist Id;
 
     public Playlist(Musicas musica, Usuarios usuario) {
         this.musica = musica;
         this.usuario = usuario;
+    }
+
+    public Playlist() {
+    }
+    
+    
+
+    public Playlist getId() {
+        return Id;
+    }
+
+    public void setId(Playlist Id) {
+        this.Id = Id;
     }
 
     public Musicas getMusica() {
