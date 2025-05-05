@@ -55,22 +55,27 @@ public class Main {
                                 + "Bem-vindo, " + usuario + "!");
                         } else {
                             System.out.println("Usuário ou senha incorreto(s)");
-//                            System.exit(1);
+                         System.exit(1);
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
+                    
+                   
+            System.out.println("Oq deseja Fazer: \n"
+                    + "1 - Adicionar musicas a Playlist \n"
+                    + "2 - Ver Playlist \n");
+            int opcao2 = input.nextInt();
+
+                   if (opcao2 == 1){
+                   
                     ResultSet resultado = musicaDAO.listarTodas();
 
                         while (resultado.next()) {
                             String titulo = resultado.getString("titulo");
                             String autor = resultado.getString("autor"); // ou "artista", conforme sua tabela
                             System.out.println("Título: " + titulo + " | Artista: " + autor);
-                        }
-                   
-
-
-                   
+                    }
                     input.nextLine(); 
 
                     Usuarios usuario1 = new Usuarios(usuario, senha); 
@@ -98,6 +103,19 @@ public class Main {
                     
                     System.out.println("Música adicionada à playlist de " + usuario1.getUsuario() + "!");
                 }
+                   else if(opcao2 == 2){
+                   
+                   
+                   ResultSet resultado = playlistDAO.consultar(usuario);
+
+                        while (resultado.next()) {
+                            String titulo = resultado.getString("titulo");
+                            String autor = resultado.getString("autor"); // ou "artista", conforme sua tabela
+                            System.out.println("Título: " + titulo + " | Artista: " + autor);
+                    }
+                   }
+                   }
+                    
                 
                 else if (opcao == 2) {
                 System.out.println("Digite o nome de usuário: ");

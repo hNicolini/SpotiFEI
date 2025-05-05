@@ -30,7 +30,6 @@ public ResultSet consultar(String titulo) throws SQLException {
         "SELECT * FROM playlist WHERE usuario = ?",
         ResultSet.TYPE_FORWARD_ONLY,
         ResultSet.CONCUR_READ_ONLY);
-    
     statement.setString(1, titulo);
     return statement.executeQuery();
 }
