@@ -12,36 +12,69 @@ public class Cadastro extends JFrame {
     private JButton voltarButton;
 
     public Cadastro() {
-        super("Cadastro de Usuário");
+        super("SpotiFEI - Cadastro");
+
+        Color backgroundColor = new Color(18, 18, 18); // Preto
+        Color greenColor = new Color(30, 215, 96);     // Verde Spotify
+        Color textColor = Color.WHITE;
+
+        Font font = new Font("SansSerif", Font.PLAIN, 16);
+
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         JLabel userLabel = new JLabel("Novo Usuário:");
         JLabel passLabel = new JLabel("Nova Senha:");
+        userLabel.setForeground(textColor);
+        passLabel.setForeground(textColor);
+        userLabel.setFont(font);
+        passLabel.setFont(font);
 
         userField = new JTextField(15);
         passField = new JPasswordField(15);
         cadastrarButton = new JButton("Cadastrar");
         voltarButton = new JButton("Voltar");
 
+        userField.setBackground(Color.DARK_GRAY);
+        userField.setForeground(textColor);
+        userField.setCaretColor(textColor);
+        userField.setBorder(BorderFactory.createLineBorder(greenColor));
+        userField.setFont(font);
+
+        passField.setBackground(Color.DARK_GRAY);
+        passField.setForeground(textColor);
+        passField.setCaretColor(textColor);
+        passField.setBorder(BorderFactory.createLineBorder(greenColor));
+        passField.setFont(font);
+
+        styleButton(cadastrarButton, greenColor, backgroundColor, font);
+        styleButton(voltarButton, greenColor, backgroundColor, font);
+
+        getContentPane().setBackground(backgroundColor);
+
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.LINE_END;
         add(userLabel, gbc);
 
         gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.LINE_START;
         add(userField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.LINE_END;
         add(passLabel, gbc);
 
         gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.LINE_START;
         add(passField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
         add(cadastrarButton, gbc);
 
         gbc.gridy = 3;
@@ -50,13 +83,22 @@ public class Cadastro extends JFrame {
         cadastrarButton.addActionListener(e -> cadastrarUsuario());
         voltarButton.addActionListener(e -> {
             this.dispose();
-            new Login(); // Retorna para a tela de login
+            new Login();
         });
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
+        setSize(400, 300);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void styleButton(JButton button, Color fg, Color bg, Font font) {
+        button.setBackground(bg);
+        button.setForeground(fg);
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createLineBorder(fg));
+        button.setFont(font);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     private void cadastrarUsuario() {
@@ -74,7 +116,6 @@ public class Cadastro extends JFrame {
 
         try (Connection conn = DriverManager.getConnection(url, userDB, passwordDB)) {
 
-            // Verifica se o usuário já existe
             String verificaSQL = "SELECT * FROM usuarios WHERE usuario = ?";
             try (PreparedStatement psVerifica = conn.prepareStatement(verificaSQL)) {
                 psVerifica.setString(1, usuario);
@@ -85,7 +126,6 @@ public class Cadastro extends JFrame {
                 }
             }
 
-            // Insere novo usuário
             String inserirSQL = "INSERT INTO usuarios (usuario, senha) VALUES (?, ?)";
             try (PreparedStatement psInsere = conn.prepareStatement(inserirSQL)) {
                 psInsere.setString(1, usuario);
@@ -93,7 +133,7 @@ public class Cadastro extends JFrame {
                 psInsere.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
                 this.dispose();
-                new Login(); // Volta para login
+                new Login();
             }
 
         } catch (SQLException e) {
@@ -102,8 +142,9 @@ public class Cadastro extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Cadastro());
+        SwingUtilities.invokeLater(Cadastro::new);
     }
+
 
 
 
