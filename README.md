@@ -1,72 +1,78 @@
-<h1>SpotiFEI</h1>
-
-SpotiFEI é um projeto desenvolvido por um aluno da FEI (Fundação Educacional Inaciana Padre Sabóia de Medeiros) com o objetivo de simular o aplicativo mundialmente famoso Spotify em uma aplicação personalizada. Este projeto permite aos usuários acessar e 
-controlar suas músicas (em forma de texto, sem faixas de áudio) favoritas diretamente através de uma interface desenvolvida para fins educacionais e de aprendizado.
+<h1>🎵 SpotiFEI</h1>
+SpotiFEI é um projeto desenvolvido por um aluno da FEI (Fundação Educacional Inaciana Padre Sabóia de Medeiros) com o objetivo de simular, de forma didática e simplificada, as funcionalidades básicas do Spotify. A aplicação permite que usuários interajam com suas músicas favoritas através de uma interface personalizada, criada com fins educacionais e voltada para o aprendizado prático de Java e banco de dados.
 
 <h2>🎯 1. Objetivo</h2>
+O objetivo principal do SpotiFEI é proporcionar uma experiência prática de desenvolvimento em Java, com foco em programação orientada a objetos (POO), uso do framework gráfico JFrame e integração com um banco de dados relacional (PostgreSQL). A ideia é transformar conceitos teóricos em prática concreta, através de uma aplicação funcional e interativa.
 
-O principal objetivo do SpotiFEI é proporcionar uma experiência prática de Java, utilizando o JFrame de forma em que o aprendizado seja cada vez mais constante, promovendo o desenvolvimento de habilidades em programação orientada a objetos.
+<h2>🚀 2. Funcionalidades</h2>
+O projeto conta com diversas funcionalidades, como:
 
-<h2>🚀2. Funcionalidades</h2>
+🔐 Autenticação de usuários (login e registro)
 
-Autenticação de usuários.
+❤️ Curtir músicas
 
-Curtir musicas.
+➕ Adicionar músicas à playlist
 
-Adicionar musicas a playlist. 
+ℹ️ Exibição de informações da faixa (nome, artista, gênero)
 
-Exibição de informações da faixa.
+🔍 Pesquisa de músicas por nome ou artista
 
-Pesquisa de músicas.
+Essas funcionalidades simulam o uso real de uma plataforma de streaming, mesmo que em formato textual.
 
-<h2>🛠️3. Tecnologias Utilizadas</h2>
+<h2>🛠️ 3. Tecnologias Utilizadas</h2>
+Java: linguagem principal da aplicação.
 
-Java para a construção do código.
+JFrame: biblioteca gráfica para construção da interface do usuário.
 
-Jframe para a construção da interface do usuário.
+PostgreSQL: banco de dados relacional para persistência de dados.
 
-Banco de dados PostgreSQL.
+Apache NetBeans: IDE utilizada no desenvolvimento.
 
 <h2>📦 4. Instalação</h2>
-
 Clone o repositório:
 
 ```bash
 git clone https://github.com/hNicolini/SpotiFEI.git
 ```
-Navegue pelas pastas do repositório.
+Importe o projeto na IDE Apache NetBeans.
 
-<h2>📄 Licença</h2>
+Certifique-se de que o PostgreSQL está instalado e o banco de dados configurado conforme os scripts do projeto.
 
-Este projeto está licenciado sob a MIT License.  
+Execute a aplicação pela classe principal (View.Login.java).
 
-<h2> Objetivos aprofundados</h2>
+<h2>📄 5. Licença</h2>
+Este projeto está licenciado sob a MIT License.
 
-  <p>o objetivo do projeto em geral é criar uma interface de facil entendimento de forma em que qualquer um possa usar essa aplicação. Esse projeto simula algumas das principais funcionalidades do Spotify, de forma inicial, ja que se trata de um projeto realizado no 3° semestre da faculdade como forma de projeto final de semestre.</p>
-  <p>aprofundando nos objetivos, o principal objetivo era a aplicação da linguagem de programação Java, de maneira orientada a objetos, e do banco de dados relacional PostgreSQL, como a forma de guardar os dados do usaurio de maneira em que ao fechar o programa os dados se mantivessem.</p>
+<h2>🔍 6. Objetivos Aprofundados</h2> <p>O projeto tem como base a ideia de criar uma aplicação intuitiva e funcional, mesmo para usuários sem conhecimento técnico. Ele simula as principais ações de um player de música, com foco na usabilidade.</p> <p>Do ponto de vista técnico, o principal objetivo foi **consolidar o conhecimento em Java orientado a objetos** e **entender o uso de bancos de dados relacionais**. A persistência de dados com PostgreSQL permitiu salvar informações dos usuários mesmo após o fechamento da aplicação, o que torna o projeto mais próximo de um sistema real.</p>
 
-<h2> Metodologia / Desenvolvimento </h2>
+<h2>🧠 7. Metodologia / Desenvolvimento</h2> <p>Para o desenvolvimento do projeto, utilizei a IDE **Apache NetBeans**, que facilitou a criação da interface gráfica com JFrame. Apesar de algumas dificuldades iniciais, como a integração com o GitHub e um design menos intuitivo em comparação ao VS Code, a IDE se mostrou eficiente em detectar e corrigir erros.</p> <p>A arquitetura da aplicação foi baseada no padrão **MVC (Model-View-Controller)**:</p>
+Model: representa os dados do sistema e regras de negócio (ex: classes Musica, Usuario, Playlist);
 
-<p>
-  a IDE escolhida para a aplicação do projeto foi o Apache NetBeans, uma IDE simples de usar e de facil observação de códigos. Alguns problemas eu consigo relatar ao usa-la, como o design ser não tão amigavel e a integração com o GitHub ser bastante diferente do VS Code, que era a IDE que eu costumava usar, porém ela faz o seu trabalho direito e até ajuda na hora de algum bug ou erro de código.  
-</p>
-<p>
-  A arquitetura do foi feita no modelo MVC (Model-View-Controller), onde separa as aplicações por pacotes de forma em que o código seja mais organizado e de melhor vizualização, é uma arquitetura utilizada para organizar aplicações de forma separada em três camadas principais:
+View: é a camada responsável pela interface gráfica;
 
-<h3>Model (Modelo)</h3>
-representa os dados e a lógica de negócio.
+Controller: gerencia a lógica da aplicação, interligando as ações do usuário à atualização dos dados e da interface.</p>
 
-<h3>View (Visão)</h3>
-é responsável pela interface com o usuário.
+<p>Esse padrão facilitou a manutenção do código e melhorou a organização do projeto, permitindo separar responsabilidades e evitar códigos repetitivos.</p>
+<h2>📚 8. Processo de Aprendizado</h2> <p>O início do projeto foi desafiador, especialmente por ainda estar aprendendo os conceitos de orientação a objetos. Para superar isso, comecei desenvolvendo o sistema todo via **terminal**, sem interface gráfica. Essa abordagem me permitiu focar primeiro na lógica e estrutura de dados.</p> <p>Posteriormente, adaptei o código para incluir a interface com o JFrame, refinando a usabilidade. Durante o processo, me preocupei em nomear as classes e métodos de forma clara e intuitiva, para facilitar a leitura e manutenção por parte de outros desenvolvedores.</p> <p>Entre os maiores aprendizados estão:</p>
+O uso de classes reutilizáveis e herança;
 
-<h3>Controller (Controlador)</h3> 
-faz a mediação entre a View e o Model, recebendo ações do usuário e atualizando os dados ou a interface conforme necessário.</p>
-<p>
-Esse modelo melhora a organização do código, facilita a manutenção e separa responsabilidades dentro do sistema.
-</p>
-<p>
-  O desenvolvimento foi complicado, eu não era familiarizado com as liguagens orientadas a objeto, porém foi um aprendizado divertido, no inicio do projeto eu estava sem rumo de onde começar, então eu fiz o projeto inteiro no terminal primeiro sem a aplicação das interfaçes graficas, apena para eu testar as aplicações com o banco de dados e as logicas que eu tinha preparado.
-</p>
-<p>
-  Separei as classes com os nomes de facil absorção e facil entendimento como "Musica", "Usuario" e "Playlist", assim ficando de facil entendimento não só para mim, como pra todo programador que vera esse código algum dia. 
-</p>
+Conexão Java com banco de dados PostgreSQL via JDBC;
+
+Separação de responsabilidades com MVC;
+
+Manipulação de eventos gráficos com JFrame;
+
+Controle de versões com Git e GitHub.</p>
+
+<h2>🔧 9. Possíveis Melhorias Futuras</h2>
+Adição de faixas de áudio reais usando bibliotecas de reprodução de som;
+
+Melhoria no design da interface com bibliotecas de terceiros (ex: JavaFX);
+
+Implementação de um sistema de recomendações baseado nas músicas curtidas;
+
+Interface de login com recuperação de senha;
+
+Deploy como aplicação web ou mobile em versões futuras.
+
+<h2>💬 10. Considerações Finais</h2> <p>O projeto SpotiFEI foi um grande passo no meu aprendizado em programação, especialmente por unir lógica de programação, banco de dados e interface gráfica em um único sistema funcional. Apesar das dificuldades encontradas no caminho, pude aprender não apenas sobre código, mas sobre **planejamento, organização de software** e a importância da documentação.</p> <p>Esse projeto representa não só uma entrega acadêmica, mas também o início de uma jornada como desenvolvedor. Espero que possa servir de inspiração e aprendizado para outros estudantes que também estão começando.</p>
